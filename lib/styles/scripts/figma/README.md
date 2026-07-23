@@ -126,11 +126,42 @@ code-owned):
   churn, little sync value. Could become STRING variables later if desired.
 - **Breakpoints** (`dt: 800`) — a media-query value, not a design token.
 
+## Canvas boards
+
+The file also carries "Foundations" boards so the synced variables are editable
+*visually*, not only through the Variables panel. Every geometric property on
+them is **bound to the existing variables** — no new tokens, nothing extra to
+sync:
+
+| Board | Live-bound to |
+|---|---|
+| **Theme Tokens** | swatch + contrast-pair fills → `Color` variables per theme mode. The pairs show the exact combos `contrast.test.ts` gates (`secondary`/`contrast` on `primary`). |
+| **Type Ramp** | sample `font-size` → `Typography/{style}/font-size`; per-mode line-height spec column (see caveat below) |
+| **Layout** | device frame w/h → `device-width`/`device-height`; layout-grid count/gutter/margin → `columns`/`gap`/`safe`; header block height → `header-height`. Grids are editor overlays — they don't render in exports/screenshots. |
+| **Motion** | bar widths → `Motion/duration-*` at 1px = 1ms |
+| **Primitives** | swatch fills → `Primitives` variables (red carries its WCAG caption) |
+| **Specimens** | per-theme CTA / link / focus ring / selection samples, fills bound to `Color` variables, text bound to text styles |
+| **Surfaces (derived, read-only)** | nothing — see below |
+
+Two caveats:
+
+- **Numeric text labels are snapshots.** Figma can only bind STRING variables
+  to text content, and these tokens are FLOAT — so the value labels (layout
+  specs, ms labels, line-height %) are static text, each marked as a snapshot
+  on the board. The *geometry* next to them is live-bound; only the printed
+  numbers go stale until the next board touch-up.
+- **The Surfaces board is a static preview.** `--surface`/`--line` stay
+  code-derived (`global.css` color-mix — see Scope), so its swatches are
+  painted, not bound. After a palette change, repaint it by running
+  `surfaces-board.figma.js` via `use_figma` — it re-derives the mixes from the
+  current variables with the same OKLab math the browser uses.
+
 ## Files
 
 | File | Role |
 |---|---|
 | `export.figma.js` | Figma Plugin API snippet: Variables + text styles → interchange object |
+| `surfaces-board.figma.js` | Figma Plugin API snippet: repaint the derived Surfaces board from current variables |
 | `figma-tokens.json` | The interchange artifact (committed snapshot) |
 | `schema.ts` | Zod schema + `FigmaTokens` type — the export/import contract |
 | `import.ts` | `figma-tokens.json` → source config → `setup:styles` (+ drift report) |
