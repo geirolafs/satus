@@ -7,7 +7,10 @@ pre-commit:
   commands:
     biome:
       glob: '*.{js,mjs,ts,jsx,tsx,css,scss}'
-      run: bun biome check --max-diagnostics=200 --write --unsafe {staged_files}
+      # --no-errors-on-unmatched: *.figma.js matches the glob but is
+      # biome-ignored; without the flag, committing only such files fails
+      # with "No files were processed".
+      run: bun biome check --max-diagnostics=200 --write --unsafe --no-errors-on-unmatched {staged_files}
       stage_fixed: true
     typecheck:
       glob: '*.{ts,tsx}'
