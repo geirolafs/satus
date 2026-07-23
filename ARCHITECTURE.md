@@ -129,7 +129,7 @@ This keeps upstream updates smooth. When you create new components instead of mo
 
 **New integration**: Add Zod env schema in `@/utils/validation`, add entry in `lib/integrations/registry.ts`. Everything else (`doctor`, listing helpers) derives automatically from the registry.
 
-**Modify styles**: Edit config in `lib/styles/`, run `bun setup:styles`
+**Modify styles**: design tokens (palette, themes, layout, typography, motion) sync from Figma via `bun run figma:import` (see `lib/styles/scripts/figma/README.md`); code-owned config in `lib/styles/` regenerates with `bun setup:styles`
 
 ---
 
