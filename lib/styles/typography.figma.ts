@@ -59,7 +59,7 @@ export const figmaTypography = {
     weight: 400,
     fontStyle: 'normal',
     letterSpacing: '-0.01em',
-    leadingTrim: 'NONE',
+    leadingTrim: 'CAP_HEIGHT',
     fontFeatureSettings: null,
     fontSize: { mobile: 12, desktop: 14 },
     lineHeight: { mobile: '100%', desktop: '100%' },

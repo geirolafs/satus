@@ -106,6 +106,8 @@
 	font-weight: 400;
 	line-height: 100%;
 	letter-spacing: -0.01em;
+	text-box-trim: both;
+	text-box-edge: cap alphabetic;
 	font-size: calc(((12 * 100) / var(--device-width)) * 1vw);
 	@variant dt { font-size: calc(((14 * 100) / var(--device-width)) * 1vw); }
 }
