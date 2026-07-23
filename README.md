@@ -18,6 +18,7 @@ Run `bun dev` and open [localhost:3000](http://localhost:3000) — the landing p
 
 - **Next.js 16 + React 19** — App Router with React 19.2 and strict TypeScript out of the box
 - **Tailwind v4** — Tailwind CSS v4 alongside CSS Modules
+- **Figma-synced design tokens** — colors, themes, layout, typography, and motion live as Figma Variables (with visual Foundations boards) and land in the repo via `bun run figma:import`, gated by a WCAG contrast test
 - **Components in Storybook** — every UI primitive is catalogued in Storybook, isolated with controls and docs
 - **Opt-in integrations** — Sanity, Shopify, HubSpot, and WebGL stay isolated under `lib/integrations` until you configure them
 - **Interactive setup** — strip the integrations you don't need from a fresh clone
@@ -103,6 +104,8 @@ lib/                    # Everything non-UI
 | App Router | [app/README.md](app/README.md) - Pages, layouts, routing |
 | Components | [components/README.md](components/README.md) - UI reference |
 | Library | [lib/README.md](lib/README.md) - Hooks, utils, integrations |
+| Styling & Tokens | [lib/styles/README.md](lib/styles/README.md) - Tailwind v4, CSS Modules, design tokens |
+| Figma Token Sync | [lib/styles/scripts/figma/README.md](lib/styles/scripts/figma/README.md) - Figma → repo workflow, canvas boards |
 | Integrations | [lib/integrations/README.md](lib/integrations/README.md) - Sanity, Shopify, etc. |
 
 ## Scripts
@@ -113,6 +116,8 @@ bun run build        # Production build
 bun storybook        # Component catalogue
 bun lint             # Biome linter
 bun run generate     # Generate pages/components
+bun run figma:import # Sync design tokens from figma-tokens.json
+bun run check        # Contrast gate (WCAG AA) + types + tests
 bun run setup:project  # Strip integrations you don't need
 bun run handoff      # Prepare for client delivery
 ```
